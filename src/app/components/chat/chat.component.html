@@ -5,6 +5,22 @@
 
 <div id="app-messages" class="app-messages">
 
+  <div  *ngFor="let chat of _cs.chats | async"
+        [ngClass]="{ 'text-right': _cs.user.name == chat.name}">
+
+    <span class="badge" [ngClass]="{ 'badge-primary': _cs.user.name == chat.name,
+                                     'badge-warning': _cs.user.name != chat.name}">
+          {{ chat.name }}
+    </span>
+
+    <p>
+      {{ chat.message }}
+    </p>
+
+  </div>
+
+
+<!--
   <div class="text-right">
 
     <span class="badge badge-primary">Mon</span>
@@ -23,6 +39,8 @@
     </p>
 
   </div>
+-->
+
 
 </div>
 

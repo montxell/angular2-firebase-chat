@@ -10,6 +10,7 @@ import { ChatService } from '../../services/chat.service';
 export class ChatComponent implements OnInit {
 
   message: string = "";
+  element: any;
 
 
   constructor( public _cs: ChatService ) {
@@ -17,10 +18,14 @@ export class ChatComponent implements OnInit {
     this._cs.loadMessages()
       .subscribe( () => {
         console.log("Messages loaded...");
+
+        setTimeout( () => this.element.scrollTop = this.element.scrollHeight, 50);
+
       })
   }
 
   ngOnInit() {
+    this.element = document.getElementById("app-messages");
   }
 
   send() {
@@ -31,6 +36,8 @@ export class ChatComponent implements OnInit {
     this._cs.addMessage( this.message )
         .then( ()=> console.log("Done!"))
         .catch( (error) => console.error(error));
+
+    this.message = "";
   }
 
 }
