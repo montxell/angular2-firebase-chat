@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ChatService } from '../../services/chat.service';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -7,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  message: string="";
+  message: string = "";
 
 
-  constructor() { }
+  constructor( public _cs: ChatService ) { }
 
   ngOnInit() {
   }
@@ -19,8 +21,10 @@ export class ChatComponent implements OnInit {
     if (this.message.length == 0) {
       return;
     }
-    
-    console.log(this.message);
+
+    this._cs.addMessage( this.message )
+        .then( ()=> console.log("Done!"))
+        .catch( (error) => console.error(error));
   }
 
 }
