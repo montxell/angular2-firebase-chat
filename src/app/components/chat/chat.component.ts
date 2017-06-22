@@ -12,7 +12,13 @@ export class ChatComponent implements OnInit {
   message: string = "";
 
 
-  constructor( public _cs: ChatService ) { }
+  constructor( public _cs: ChatService ) {
+
+    this._cs.loadMessages()
+      .subscribe( () => {
+        console.log("Messages loaded...");
+      })
+  }
 
   ngOnInit() {
   }

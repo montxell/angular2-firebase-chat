@@ -12,6 +12,20 @@ export class ChatService {
     // this.chats = db.list('/chats');
   }
 
+
+  loadMessages() {
+
+    this.chats = this.db.list('chats'), {
+      query: {
+        limitToLast: 20,
+        orderByKey: true
+      }
+    };
+
+    return this.chats;
+  }
+
+
   addMessage( text: string ) {
 
     let message: Message = {
