@@ -4,7 +4,25 @@
   <h1>Firechat</h1>
   <hr>
 
-  <div class="chat-window">
+  <div class="row" *ngIf="_cs.user">
+
+    <div class="col-md-12 text-right">
+      <button (click)="_cs.logout()" type="button" class="btn btn-outline-danger">
+        Log out
+      </button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="!_cs.user" class="animated fadeIn fast">
+
+    <app-login></app-login>
+
+  </div>
+
+
+  <div *ngIf="_cs.user" class="chat-window animated fadeIn fast">
 
     <app-chat></app-chat>
 
