@@ -21,6 +21,8 @@ export class ChatService {
       // User logged
       this.user = JSON.parse(localStorage.getItem('user'));
 
+      //console.log(this.user);
+
     } else {
 
       this.user = null;
@@ -45,8 +47,9 @@ export class ChatService {
   addMessage( text: string ) {
 
     let message: Message = {
-      name:"Montxell",
-      message: text
+      name: this.user.user.displayName,
+      message: text,
+      uid: this.user.user.uid
     }
 
     return this.chats.push( message ); //returns a promise
@@ -83,7 +86,7 @@ export class ChatService {
      let secret = result.credential.secret;
 
      // The signed-in user info.
-     this.user = result.user;
+     this.user = result;
 
      localStorage.setItem('user', JSON.stringify(result));
 
